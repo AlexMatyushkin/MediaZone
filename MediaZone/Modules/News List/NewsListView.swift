@@ -61,9 +61,17 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
         do {
            let html = try String(contentsOf: url)
            let doc = try SwiftSoup.parse(html).body()
-           let test = try doc?.getElementsByClass("mz-publish__text")
-           let text = try test?.text()
+           let fullDescription = try doc?.getElementsByClass("mz-publish__text")
+           let text = try fullDescription?.text()
             print(text)
+            if let online = try doc?.getElementsByClass("event-container-root") {
+                guard let items = try doc?.getElementsByClass("mz-publish__text__item") else { return }
+                
+                for item in items {
+                    let text = try item.text()
+                    print(text)
+                }
+            }
         } catch {
             print("Error")
         }
