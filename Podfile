@@ -6,5 +6,6 @@ target 'MediaZone' do
   use_frameworks!
 
   # Pods for MediaZone
-
+	pod 'FeedKit', '~> 8.0'
+	pod 'Kingfisher', '~> 5.0'
 end
