@@ -13,16 +13,23 @@ class NewsListPresenter {
     
     weak private var _view: NewsListViewProtocol?
     private var interactor: NewsListInteractorProtocol
-    private var wireframe: NewsListRouterProtocol
+    private var router: NewsListRouterProtocol
+    
+    var source = [RSSnewsList]()
     
     init(view: NewsListViewProtocol) {
         self._view = view
         self.interactor = NewsListInteractor()
-        self.wireframe = NewsListRouter()
+        self.router = NewsListRouter()
     }
 }
 
 // MARK: - extending NewsListPresenter to implement it's protocol
 extension NewsListPresenter: NewsListPresenterProtocol {
-    
+    func loadNews() {
+       self.interactor.getNewsList(complation: {[weak self] result in
+            self?.source = result
+            self?._view?.reloadTableView()
+       })
+    }
 }

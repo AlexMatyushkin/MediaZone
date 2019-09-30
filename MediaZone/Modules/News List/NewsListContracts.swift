@@ -18,19 +18,23 @@ import UIKit
 protocol NewsListViewProtocol: class {
     // Update UI with value returned.
     /// Set the view Object of Type NewsListEntity
+    func reloadTableView()
 }
 
 //MARK: Interactor -
 /// NewsList Module Interactor Protocol
 protocol NewsListInteractorProtocol {
-    // Fetch Object from Data Layer
+    var rssFeed: RSSFeed { get }
    
+    func getNewsList(complation: @escaping ([RSSnewsList]) -> Void)
 }
 
 //MARK: Presenter -
 /// NewsList Module Presenter Protocol
 protocol NewsListPresenterProtocol {
-   
+    var source: [RSSnewsList] { get set }
+    
+    func loadNews() 
 }
 
 //MARK: Router (aka: Wireframe) -
@@ -38,4 +42,6 @@ protocol NewsListPresenterProtocol {
 protocol NewsListRouterProtocol {
     // Show Details of Entity Object coming from ParentView Controller.
     // func showDetailsFor(object: NewsListEntity, parentViewController viewController: UIViewController)
+    
+    
 }

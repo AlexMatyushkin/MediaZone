@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Kingfisher
+
 import SwiftSoup
 
 /// NewsList Module View
@@ -16,19 +16,14 @@ class NewsListView: UIViewController {
     private var presenter: NewsListPresenterProtocol!
     @IBOutlet weak var tableView: UITableView!
     
-    let rssFeed = RSSFeed()
-    var source = [RSSnewsList]()
+  //  let rssFeed = RSSFeed()
+   // var source = [RSSnewsList]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.presenter = NewsListPresenter(view: self)
         registrationCells()
-        rssFeed.getRSS(complation: { newsList in
-            self.source = newsList
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        })
+        self.presenter.loadNews()
     }
     
     private func registrationCells() {
@@ -40,14 +35,13 @@ class NewsListView: UIViewController {
 
 extension NewsListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.source.count
+        return self.presenter.source.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsTableViewCell else { return UITableViewCell()}
-        cell.titleLabel.text = self.source[indexPath.row].title
-        cell.descriptionLabel.text = self.source[indexPath.row].description
-        cell.loadImage(link: self.source[indexPath.row].image)
+        cell.titleLabel.text = self.presenter.source[indexPath.row].title
+        cell.publishDateLabel.text = self.presenter.source[indexPath.row].publishDate
         return cell
     }
     
@@ -56,7 +50,7 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = URL(string: self.source[indexPath.row].url!) else { return }
+        guard let url = URL(string: self.presenter.source[indexPath.row].url!) else { return }
          // This part of code can parse news and get full description
         do {
            let html = try String(contentsOf: url)
@@ -81,5 +75,10 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
 // MARK: - extending NewsListView to implement it's protocol
 extension NewsListView: NewsListViewProtocol {
     
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 

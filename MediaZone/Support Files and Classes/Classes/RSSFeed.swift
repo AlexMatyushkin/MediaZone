@@ -14,7 +14,7 @@ struct RSSnewsList {
     let url: String?
     let image: String?
     let description: String?
-    let publishDate: Date?
+    let publishDate: String
 }
 
 class RSSFeed {
@@ -31,7 +31,11 @@ class RSSFeed {
                 var rssNewsList = [RSSnewsList]()
                 
                 for item in items {
-                    let news = RSSnewsList(title: item.title, url: item.link, image: item.enclosure?.attributes?.url, description: item.description, publishDate: item.pubDate)
+                    guard let date = item.pubDate else { return }
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
+                    let correctDate = formatter.string(from: date)
+                    let news = RSSnewsList(title: item.title, url: item.link, image: item.enclosure?.attributes?.url, description: item.description, publishDate: correctDate)
                     rssNewsList.append(news)
                 }
                 complation(rssNewsList)

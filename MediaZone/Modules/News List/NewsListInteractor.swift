@@ -7,8 +7,15 @@
 //
 
 import UIKit
-
+import FeedKit
 /// NewsList Module Interactor
 class NewsListInteractor: NewsListInteractorProtocol {
+    var rssFeed: RSSFeed = RSSFeed()
+    
+    func getNewsList(complation: @escaping ([RSSnewsList]) -> Void) {
+        rssFeed.getRSS(complation: { newsList in
+            complation(newsList)
+        })
+    }
 
 }

@@ -12,9 +12,9 @@ import Kingfisher
 class NewsTableViewCell: UITableViewCell {
 
 
-    @IBOutlet weak var startImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var publishDateLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,17 +27,8 @@ class NewsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadImage(link: String? ) {
-        guard let link = link else { return }
-        if let url = URL(string: link) {
-            self.startImage.kf.setImage(with: url)
-     
-        }
-            
-        }
-    
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.startImage.image = nil
+        self.publishDateLabel.text = nil
     }
 }
