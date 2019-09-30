@@ -8,4 +8,5 @@ target 'MediaZone' do
   # Pods for MediaZone
 	pod 'FeedKit', '~> 8.0'
 	pod 'Kingfisher', '~> 5.0'
+	pod 'SwiftSoup'
 end

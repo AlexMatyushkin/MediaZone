@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SwiftSoup
 
 /// NewsList Module View
 class NewsListView: UIViewController {
@@ -52,6 +53,20 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 250
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let url = URL(string: self.source[indexPath.row].url!) else { return }
+         // This part of code can parse news and get full description
+        do {
+           let html = try String(contentsOf: url)
+           let doc = try SwiftSoup.parse(html).body()
+           let test = try doc?.getElementsByClass("mz-publish__text")
+           let text = try test?.text()
+            print(text)
+        } catch {
+            print("Error")
+        }
     }
 }
 

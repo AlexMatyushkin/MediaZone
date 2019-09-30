@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		72D75A4ED75121DCDB9D37D2 /* Pods_MediaZone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B971BCB9DF292936CD7A747 /* Pods_MediaZone.framework */; };
+		10FE90A606F4B9EE60208BC1 /* Pods_MediaZone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0FC2E9468243E49A91E6E8D /* Pods_MediaZone.framework */; };
 		EB54D8C92341CC2D00E41E09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB54D8C82341CC2D00E41E09 /* AppDelegate.swift */; };
 		EB54D8D02341CC3000E41E09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB54D8CF2341CC3000E41E09 /* Assets.xcassets */; };
 		EB54D8D32341CC3000E41E09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB54D8D12341CC3000E41E09 /* LaunchScreen.storyboard */; };
@@ -24,9 +24,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2B971BCB9DF292936CD7A747 /* Pods_MediaZone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaZone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E4DDB567518BA17A78D0AD6 /* Pods-MediaZone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaZone.debug.xcconfig"; path = "Target Support Files/Pods-MediaZone/Pods-MediaZone.debug.xcconfig"; sourceTree = "<group>"; };
-		BD77455DBDCAFBD4A00FA86C /* Pods-MediaZone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaZone.release.xcconfig"; path = "Target Support Files/Pods-MediaZone/Pods-MediaZone.release.xcconfig"; sourceTree = "<group>"; };
+		03F85B1CA5B40A3C2B2DA685 /* Pods-MediaZone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaZone.debug.xcconfig"; path = "Target Support Files/Pods-MediaZone/Pods-MediaZone.debug.xcconfig"; sourceTree = "<group>"; };
+		0F5976FD999432303F81CB6D /* Pods-MediaZone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaZone.release.xcconfig"; path = "Target Support Files/Pods-MediaZone/Pods-MediaZone.release.xcconfig"; sourceTree = "<group>"; };
+		B0FC2E9468243E49A91E6E8D /* Pods_MediaZone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaZone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB54D8C52341CC2D00E41E09 /* MediaZone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MediaZone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB54D8C82341CC2D00E41E09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EB54D8CF2341CC3000E41E09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,17 +49,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				72D75A4ED75121DCDB9D37D2 /* Pods_MediaZone.framework in Frameworks */,
+				10FE90A606F4B9EE60208BC1 /* Pods_MediaZone.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A941073AE5B127F4E618AA91 /* Frameworks */ = {
+		93052D0DD476B0D70A2949E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2B971BCB9DF292936CD7A747 /* Pods_MediaZone.framework */,
+				B0FC2E9468243E49A91E6E8D /* Pods_MediaZone.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -70,7 +70,7 @@
 				EB54D8C72341CC2D00E41E09 /* MediaZone */,
 				EB54D8C62341CC2D00E41E09 /* Products */,
 				FBF377FC5DD9B62B8452B657 /* Pods */,
-				A941073AE5B127F4E618AA91 /* Frameworks */,
+				93052D0DD476B0D70A2949E6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,8 +154,8 @@
 		FBF377FC5DD9B62B8452B657 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6E4DDB567518BA17A78D0AD6 /* Pods-MediaZone.debug.xcconfig */,
-				BD77455DBDCAFBD4A00FA86C /* Pods-MediaZone.release.xcconfig */,
+				03F85B1CA5B40A3C2B2DA685 /* Pods-MediaZone.debug.xcconfig */,
+				0F5976FD999432303F81CB6D /* Pods-MediaZone.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -167,11 +167,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB54D8D72341CC3000E41E09 /* Build configuration list for PBXNativeTarget "MediaZone" */;
 			buildPhases = (
-				32E3D5428EAB5A210633EF60 /* [CP] Check Pods Manifest.lock */,
+				12020614707422B9C2B19720 /* [CP] Check Pods Manifest.lock */,
 				EB54D8C12341CC2D00E41E09 /* Sources */,
 				EB54D8C22341CC2D00E41E09 /* Frameworks */,
 				EB54D8C32341CC2D00E41E09 /* Resources */,
-				1865D5E157CC9AB7C3DE0E58 /* [CP] Embed Pods Frameworks */,
+				2DAF37AE6C4EFC5AC0FF8AC2 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -230,24 +230,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1865D5E157CC9AB7C3DE0E58 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MediaZone/Pods-MediaZone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MediaZone/Pods-MediaZone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MediaZone/Pods-MediaZone-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		32E3D5428EAB5A210633EF60 /* [CP] Check Pods Manifest.lock */ = {
+		12020614707422B9C2B19720 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -267,6 +250,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2DAF37AE6C4EFC5AC0FF8AC2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MediaZone/Pods-MediaZone-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MediaZone/Pods-MediaZone-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MediaZone/Pods-MediaZone-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -420,7 +420,7 @@
 		};
 		EB54D8D82341CC3000E41E09 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E4DDB567518BA17A78D0AD6 /* Pods-MediaZone.debug.xcconfig */;
+			baseConfigurationReference = 03F85B1CA5B40A3C2B2DA685 /* Pods-MediaZone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -439,7 +439,7 @@
 		};
 		EB54D8D92341CC3000E41E09 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BD77455DBDCAFBD4A00FA86C /* Pods-MediaZone.release.xcconfig */;
+			baseConfigurationReference = 0F5976FD999432303F81CB6D /* Pods-MediaZone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
