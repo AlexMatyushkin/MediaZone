@@ -19,6 +19,7 @@ class PresentView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presentTextView.text = presenter.fullDescription
+        self.titleLabel.text = self.presenter.title
     }
     
 }

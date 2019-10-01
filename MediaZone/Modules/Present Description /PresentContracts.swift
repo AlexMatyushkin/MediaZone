@@ -30,6 +30,7 @@ protocol PresentInteractorProtocol {
 /// Present Module Presenter Protocol
 protocol PresentPresenterProtocol {
     var fullDescription: String? { get set }
+    var title: String? { get set }
 }
 
 //MARK: Router (aka: Wireframe) -

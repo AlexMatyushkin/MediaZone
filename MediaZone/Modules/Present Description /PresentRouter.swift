@@ -17,7 +17,7 @@ class PresentRouter: PresentRouterProtocol {
         let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Present")
         
         if let viewController = viewController as? PresentView {
-            let presenter = PresentPresenter(view: viewController, fullDescription: description)
+            let presenter = PresentPresenter(view: viewController, fullDescription: description, news: rssNews)
             viewController.presenter = presenter
         }
         

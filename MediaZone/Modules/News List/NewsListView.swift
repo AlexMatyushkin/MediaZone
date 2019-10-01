@@ -31,6 +31,7 @@ class NewsListView: UIViewController {
         self.tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "News")
         self.refreshController.addTarget(self, action: #selector(refresh), for: .valueChanged)
         self.tableView.addSubview(self.refreshController)
+        self.tableView.backgroundColor = #colorLiteral(red: 0.3334586322, green: 0.3390970528, blue: 0.4115427136, alpha: 1)
     }
     
     @objc func refresh() {
@@ -76,11 +77,14 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsTableViewCell else { return UITableViewCell()}
         cell.titleLabel.text = self.presenter.source[indexPath.row].title
         cell.publishDateLabel.text = self.presenter.source[indexPath.row].publishDate
+        cell.layer.borderColor = #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
+        cell.layer.borderWidth = 3
+        cell.layer.cornerRadius = 20
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

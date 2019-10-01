@@ -16,12 +16,14 @@ class PresentPresenter {
     private var router: PresentRouterProtocol
     
     var fullDescription: String?
+    var title: String?
     
-    init(view: PresentViewProtocol, fullDescription: String?) {
+    init(view: PresentViewProtocol, fullDescription: String?, news: RSSnewsList) {
         self.view = view
         self.fullDescription = fullDescription
         self.interactor = PresentInteractor()
         self.router = PresentRouter()
+        self.title = news.title
     }
 }
 
