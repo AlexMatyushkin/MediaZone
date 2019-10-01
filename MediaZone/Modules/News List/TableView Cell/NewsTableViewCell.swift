@@ -18,8 +18,10 @@ class NewsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        layer.cornerRadius = 15
-        layer.masksToBounds = false
+        self.layer.borderColor = #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
+        self.layer.borderWidth = 3
+        self.layer.cornerRadius = 20
+        layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,18 +35,4 @@ class NewsTableViewCell: UITableViewCell {
         self.publishDateLabel.text = nil
     }
     
- override open var frame: CGRect {
-     get {
-         return super.frame
-     }
-     set (newFrame) {
-         var frame =  newFrame
-         frame.origin.y += 10
-         frame.origin.x += 10
-         frame.size.height -= 15
-         frame.size.width -= 2 * 10
-         super.frame = frame
-     }
- }
-
 }

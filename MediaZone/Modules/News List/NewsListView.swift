@@ -23,6 +23,8 @@ class NewsListView: UIViewController {
         registrationCells()
         self.presenter.loadNews()
         self.title = "Последние публикации"
+        self.tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 600
     }
     
     private func registrationCells() {
@@ -77,18 +79,16 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsTableViewCell else { return UITableViewCell()}
         cell.titleLabel.text = self.presenter.source[indexPath.row].title
         cell.publishDateLabel.text = self.presenter.source[indexPath.row].publishDate
-        cell.layer.borderColor = #colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 1)
-        cell.layer.borderWidth = 3
-        cell.layer.cornerRadius = 20
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 5
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let url = URL(string: self.presenter.source[indexPath.row].url!) else { return }
         self.presenter.makeNewsFullDescription(url: url, index: indexPath.row)
     }
+
 }
