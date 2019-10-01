@@ -22,6 +22,7 @@ class NewsListView: UIViewController {
         self.presenter = NewsListPresenter(view: self)
         registrationCells()
         self.presenter.loadNews()
+        self.title = "Последние публикации"
     }
     
     private func registrationCells() {

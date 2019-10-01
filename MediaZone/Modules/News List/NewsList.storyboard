@@ -33,27 +33,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RFl-vg-gzS">
-                                <rect key="frame" x="0.0" y="153" width="414" height="709"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7Px-hh-m65" firstAttribute="bottom" secondItem="RFl-vg-gzS" secondAttribute="bottom" id="Fse-9c-2Jh"/>
-                            <constraint firstItem="RFl-vg-gzS" firstAttribute="top" secondItem="7Px-hh-m65" secondAttribute="top" constant="65" id="JFj-Dn-D0D"/>
+                            <constraint firstItem="RFl-vg-gzS" firstAttribute="top" secondItem="7Px-hh-m65" secondAttribute="top" id="JFj-Dn-D0D"/>
                             <constraint firstItem="RFl-vg-gzS" firstAttribute="trailing" secondItem="7Px-hh-m65" secondAttribute="trailing" id="SZR-dh-n9m"/>
                             <constraint firstItem="RFl-vg-gzS" firstAttribute="leading" secondItem="7Px-hh-m65" secondAttribute="leading" id="rNM-1x-o8R"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Px-hh-m65"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WoJ-qq-je9"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="WoJ-qq-je9"/>
                     <connections>
                         <outlet property="tableView" destination="RFl-vg-gzS" id="15L-EP-ihc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fgb-Jc-aqC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-417" y="228"/>
+            <point key="canvasLocation" x="-417.39130434782612" y="227.67857142857142"/>
         </scene>
     </scenes>
 </document>
