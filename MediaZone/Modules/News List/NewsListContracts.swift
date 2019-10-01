@@ -18,15 +18,22 @@ import UIKit
 protocol NewsListViewProtocol: class {
     // Update UI with value returned.
     /// Set the view Object of Type NewsListEntity
+    func stopRefreshing()
+    func presentAlert(alert: UIAlertController) 
     func reloadTableView()
+    func presentModule(viewController: UIViewController) 
 }
 
 //MARK: Interactor -
 /// NewsList Module Interactor Protocol
 protocol NewsListInteractorProtocol {
     var rssFeed: RSSFeed { get }
-   
-    func getNewsList(complation: @escaping ([RSSnewsList]) -> Void)
+    var newListRecived: (([RSSnewsList]) -> Void)? { get set }
+    var errorRecived: ((Error?) -> Void)? { get set }
+    var fullNewsDescriptionRecived: ((String?, [String]?) -> Void)? { get set }
+    
+    func getNewsList()
+    func getFullNewsDescription(url: URL)
 }
 
 //MARK: Presenter -
@@ -34,6 +41,7 @@ protocol NewsListInteractorProtocol {
 protocol NewsListPresenterProtocol {
     var source: [RSSnewsList] { get set }
     
+    func makeNewsFullDescription(url: URL, index: Int)
     func loadNews() 
 }
 
@@ -42,6 +50,6 @@ protocol NewsListPresenterProtocol {
 protocol NewsListRouterProtocol {
     // Show Details of Entity Object coming from ParentView Controller.
     // func showDetailsFor(object: NewsListEntity, parentViewController viewController: UIViewController)
-    
+    func createPresentModule(description: String?, onlineText: [String]?, rssNews: RSSnewsList) -> UIViewController
     
 }

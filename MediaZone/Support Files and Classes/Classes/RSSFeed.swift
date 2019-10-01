@@ -19,7 +19,7 @@ struct RSSnewsList {
 
 class RSSFeed {
    
-    func getRSS(complation: @escaping ([RSSnewsList]) -> Void) {
+    func getRSS(complation: @escaping ([RSSnewsList]?, Error?) -> Void) {
         let feedURL = URL.init(string: "https://zona.media/rss")!
         
         let parser = FeedParser(URL: feedURL)
@@ -38,8 +38,11 @@ class RSSFeed {
                     let news = RSSnewsList(title: item.title, url: item.link, image: item.enclosure?.attributes?.url, description: item.description, publishDate: correctDate)
                     rssNewsList.append(news)
                 }
-                complation(rssNewsList)
+                complation(rssNewsList, nil)
         }
+            if result.isFailure {
+                complation(nil, result.error)
+            }
     }
     }
 }

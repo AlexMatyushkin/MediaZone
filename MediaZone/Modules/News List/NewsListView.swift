@@ -8,17 +8,15 @@
 
 import UIKit
 
-import SwiftSoup
-
 /// NewsList Module View
 class NewsListView: UIViewController {
     
     private var presenter: NewsListPresenterProtocol!
     @IBOutlet weak var tableView: UITableView!
     
-  //  let rssFeed = RSSFeed()
-   // var source = [RSSnewsList]()
-    
+    var refreshController: UIRefreshControl = UIRefreshControl()
+  
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.presenter = NewsListPresenter(view: self)
@@ -30,9 +28,44 @@ class NewsListView: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: "NewsTableViewCell", bundle: nil), forCellReuseIdentifier: "News")
+        self.refreshController.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        self.tableView.addSubview(self.refreshController)
+    }
+    
+    @objc func refresh() {
+        self.refreshController.beginRefreshing()
+        self.presenter.loadNews()
     }
 }
 
+// MARK: - extending NewsListView to implement it's protocol
+extension NewsListView: NewsListViewProtocol {
+    func stopRefreshing() {
+        DispatchQueue.main.async {
+            self.refreshController.endRefreshing()
+        }
+    }
+    
+    func presentAlert(alert: UIAlertController) {
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
+    }
+    
+    func reloadTableView() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func presentModule(viewController: UIViewController) {
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
+}
+
+// Table View Extensions
 extension NewsListView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.presenter.source.count
@@ -51,34 +84,6 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let url = URL(string: self.presenter.source[indexPath.row].url!) else { return }
-         // This part of code can parse news and get full description
-        do {
-           let html = try String(contentsOf: url)
-           let doc = try SwiftSoup.parse(html).body()
-           let fullDescription = try doc?.getElementsByClass("mz-publish__text")
-           let text = try fullDescription?.text()
-            print(text)
-            if let online = try doc?.getElementsByClass("event-container-root") {
-                guard let items = try doc?.getElementsByClass("mz-publish__text__item") else { return }
-                
-                for item in items {
-                    let text = try item.text()
-                    print(text)
-                }
-            }
-        } catch {
-            print("Error")
-        }
+        self.presenter.makeNewsFullDescription(url: url, index: indexPath.row)
     }
 }
-
-// MARK: - extending NewsListView to implement it's protocol
-extension NewsListView: NewsListViewProtocol {
-    
-    func reloadTableView() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
-}
-
