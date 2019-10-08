@@ -8,6 +8,7 @@
 
 import UIKit
 import Kingfisher
+import SnapKit
 
 class NewsTableViewCell: UITableViewCell {
 
@@ -36,12 +37,27 @@ class NewsTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.publishDateLabel.text = nil
-        self.presentImage.image = UIImage(named: "prison")
+        self.presentImage.isHidden = false
+    
+        self.titleLabel.snp.remakeConstraints { [weak self] make in
+            make.trailing.equalTo(presentImage.snp.leading).inset(8)
+        }
     }
     
     func setImage(link: String?) {
-        guard let link = link else { return }
+        guard let link = link else {
+            self.presentImage.isHidden = true
+            self.titleLabel.snp.remakeConstraints { [weak self] make in
+                make.trailing.equalToSuperview().inset(11)
+            }
+            return
+        }
         guard let url = URL(string: link) else { return }
         self.presentImage.kf.setImage(with: url)
+        self.presentImage.snp.remakeConstraints { [weak self] make in
+            guard let height = self?.frame.height else { return }
+            let margin = height / 2
+            make.top.equalToSuperview().inset(margin)
+        }
     }
 }

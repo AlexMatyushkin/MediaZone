@@ -10,4 +10,5 @@ target 'MediaZone' do
 	pod 'Kingfisher', '~> 5.0'
 	pod 'SwiftSoup'
 	pod 'JGProgressHUD'
+	pod 'SnapKit'
 end

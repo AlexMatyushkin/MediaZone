@@ -21,13 +21,12 @@ class PresentView: UIViewController {
     }
     
     private func registrationCells() {
-          self.tableView.delegate = self
-          self.tableView.dataSource = self
-          self.tableView.register(UINib(nibName: "TitleTableViewCell", bundle: nil), forCellReuseIdentifier: "Text")
-          self.tableView.register(UINib(nibName: "ImageTableViewCell", bundle: nil), forCellReuseIdentifier: "Image")
-         // self.refreshController.addTarget(self, action: #selector(refresh), for: .valueChanged)
-         // self.tableView.addSubview(self.refreshController)
-          self.tableView.backgroundColor = #colorLiteral(red: 0.3334586322, green: 0.3390970528, blue: 0.4115427136, alpha: 1)
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.register(UINib(nibName: "TitleTableViewCell", bundle: nil), forCellReuseIdentifier: "Text")
+        self.tableView.register(UINib(nibName: "ImageTableViewCell", bundle: nil), forCellReuseIdentifier: "Image")
+        self.tableView.isEditing = false
+        self.tableView.allowsSelection = false
       }
 }
 
@@ -39,12 +38,8 @@ extension PresentView: PresentViewProtocol {
 extension PresentView: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if let online = self.presenter.news.onlineSubject {
-            if !online.isEmpty {
-                return 2
-            } else {
-                return 1
-            }
+        if !self.presenter.onlineText.isEmpty {
+            return 2
         } else {
             return 1
         }
@@ -65,7 +60,7 @@ extension PresentView: UITableViewDelegate, UITableViewDataSource {
             switch self.presenter.cellType[indexPath.row] {
                    case .title:
                        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Text") as? TitleTableViewCell else { return UITableViewCell()}
-                       cell.stringLabel.font = UIFont (name: "HelveticaNeue-Light", size: 30)
+                       cell.stringLabel.font = UIFont.systemFont(ofSize: 26, weight: .bold)
                        cell.stringLabel.textAlignment = .center
                        cell.stringLabel.text = self.presenter.news.title
                        return cell
@@ -82,13 +77,11 @@ extension PresentView: UITableViewDelegate, UITableViewDataSource {
                        return UITableViewCell()
                    }
         } else {
-             guard let cell = tableView.dequeueReusableCell(withIdentifier: "Text") as? TitleTableViewCell else { return UITableViewCell()}
-             cell.layer.borderColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
-             cell.layer.borderWidth = 1
-             cell.stringLabel.text = self.presenter.news.onlineSubject?[indexPath.row]
-             cell.stringLabel.textAlignment = .left
-             cell.stringLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
-             return cell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "Text") as? TitleTableViewCell else { return UITableViewCell()}
+            cell.stringLabel.text = "-  \(self.presenter.onlineText[indexPath.row])\n"
+            cell.stringLabel.textAlignment = .left
+            cell.stringLabel.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.bold)
+            return cell
         }
         
         

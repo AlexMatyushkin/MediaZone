@@ -30,7 +30,7 @@ protocol PresentInteractorProtocol {
 protocol PresentPresenterProtocol {
     var news: FullNews { get set }
     var cellType: [PresentCellType] { get set }
-  
+    var onlineText: [String] { get set }
 }
 
 //MARK: Router (aka: Wireframe) -

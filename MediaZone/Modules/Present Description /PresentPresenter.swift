@@ -17,6 +17,7 @@ class PresentPresenter {
     
     var news: FullNews
     var cellType = [PresentCellType]()
+    var onlineText = [String]()
     
     init(view: PresentViewProtocol, news: FullNews) {
         self.view = view
@@ -36,7 +37,8 @@ class PresentPresenter {
             if !onlineSubject.isEmpty{
               self.cellType.removeLast()
               self.cellType.append(.online)
-              
+                guard let onlineTextArray = news.onlineSubject else { return }
+                self.onlineText = onlineTextArray.reversed()
             }
         }
     
