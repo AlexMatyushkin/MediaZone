@@ -21,27 +21,29 @@ protocol NewsListViewProtocol: class {
     func stopRefreshing()
     func presentAlert(alert: UIAlertController) 
     func reloadTableView()
-    func presentModule(viewController: UIViewController) 
+    func presentModule(viewController: UIViewController)
+    func startShowHud()
+    func dissmissHud()
 }
 
 //MARK: Interactor -
 /// NewsList Module Interactor Protocol
 protocol NewsListInteractorProtocol {
     var rssFeed: RSSFeed { get }
-    var newListRecived: (([RSSnewsList]) -> Void)? { get set }
     var errorRecived: ((Error?) -> Void)? { get set }
-    var fullNewsDescriptionRecived: ((String?, [String]?) -> Void)? { get set }
+    var listOfNewsRecived: (([RSSnews]) -> Void)? { get set }
+    var fullNewsDescriptionRecived: ((FullNews) -> Void)? { get set }
     
+    func getFullNewsDescription(url: URL, news: RSSnews)
     func getNewsList()
-    func getFullNewsDescription(url: URL)
 }
 
 //MARK: Presenter -
 /// NewsList Module Presenter Protocol
 protocol NewsListPresenterProtocol {
-    var source: [RSSnewsList] { get set }
+    var source: [RSSnews] { get set }
     
-    func makeNewsFullDescription(url: URL, index: Int)
+    func makeNewsFullDescription(index: Int)
     func loadNews() 
 }
 
@@ -50,6 +52,6 @@ protocol NewsListPresenterProtocol {
 protocol NewsListRouterProtocol {
     // Show Details of Entity Object coming from ParentView Controller.
     // func showDetailsFor(object: NewsListEntity, parentViewController viewController: UIViewController)
-    func createPresentModule(description: String?, onlineText: [String]?, rssNews: RSSnewsList) -> UIViewController
+    func createPresentModule(rssNews: FullNews) -> UIViewController 
     
 }

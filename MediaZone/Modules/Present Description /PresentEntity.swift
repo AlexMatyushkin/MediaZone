@@ -12,3 +12,10 @@ import UIKit
 struct PresentEntity {
 
 }
+
+enum PresentCellType {
+    case title
+    case image
+    case fullDescription
+    case online
+}

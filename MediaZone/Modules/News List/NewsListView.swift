@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 /// NewsList Module View
 class NewsListView: UIViewController {
     
     private var presenter: NewsListPresenterProtocol!
     @IBOutlet weak var tableView: UITableView!
+    var hud = JGProgressHUD(style: .dark)
     
     var refreshController: UIRefreshControl = UIRefreshControl()
   
@@ -44,6 +46,18 @@ class NewsListView: UIViewController {
 
 // MARK: - extending NewsListView to implement it's protocol
 extension NewsListView: NewsListViewProtocol {
+    func startShowHud() {
+        DispatchQueue.main.async {
+            self.hud.show(in: self.view, animated: true)
+        }
+    }
+    
+    func dissmissHud() {
+        DispatchQueue.main.async {
+            self.hud.dismiss(animated: true)
+        }
+    }
+    
     func stopRefreshing() {
         DispatchQueue.main.async {
             self.refreshController.endRefreshing()
@@ -79,6 +93,8 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "News") as? NewsTableViewCell else { return UITableViewCell()}
         cell.titleLabel.text = self.presenter.source[indexPath.row].title
         cell.publishDateLabel.text = self.presenter.source[indexPath.row].publishDate
+        cell.setImage(link: self.presenter.source[indexPath.row].image)
+        
         return cell
     }
     
@@ -87,8 +103,7 @@ extension NewsListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = URL(string: self.presenter.source[indexPath.row].url!) else { return }
-        self.presenter.makeNewsFullDescription(url: url, index: indexPath.row)
+        self.presenter.makeNewsFullDescription(index: indexPath.row)
     }
 
 }

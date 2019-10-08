@@ -15,15 +15,31 @@ class PresentPresenter {
     private var interactor: PresentInteractorProtocol
     private var router: PresentRouterProtocol
     
-    var fullDescription: String?
-    var title: String?
+    var news: FullNews
+    var cellType = [PresentCellType]()
     
-    init(view: PresentViewProtocol, fullDescription: String?, news: RSSnewsList) {
+    init(view: PresentViewProtocol, news: FullNews) {
         self.view = view
-        self.fullDescription = fullDescription
+        self.news = news
         self.interactor = PresentInteractor()
         self.router = PresentRouter()
-        self.title = news.title
+        
+        self.cellType.append(.title)
+        
+        if let image = news.image {
+                  self.cellType.append(.image)
+        }
+        
+        self.cellType.append(.fullDescription)
+        
+        if let onlineSubject = news.onlineSubject {
+            if !onlineSubject.isEmpty{
+              self.cellType.removeLast()
+              self.cellType.append(.online)
+              
+            }
+        }
+    
     }
 }
 

@@ -10,8 +10,9 @@ import UIKit
 
 /// NewsList Module Router (aka: Wireframe)
 class NewsListRouter: NewsListRouterProtocol {
-    func createPresentModule(description: String?, onlineText: [String]?, rssNews: RSSnewsList) -> UIViewController {
-       let presentModule = PresentRouter().buildModule(description: description, onlineText: onlineText, rssNews: rssNews)
+
+    func createPresentModule(rssNews: FullNews) -> UIViewController {
+       let presentModule = PresentRouter().buildModule(rssNews: rssNews)
        return presentModule
     }
 }

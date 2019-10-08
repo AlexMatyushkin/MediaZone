@@ -11,13 +11,13 @@ import UIKit
 /// Present Module Router (aka: Wireframe)
 class PresentRouter: PresentRouterProtocol {
        
-    func buildModule(description: String?, onlineText: [String]?, rssNews: RSSnewsList) -> UIViewController {
+    func buildModule(rssNews: FullNews) -> UIViewController {
 
         let mainStoryboard = UIStoryboard(name: "Present", bundle: nil)
         let viewController = mainStoryboard.instantiateViewController(withIdentifier: "Present")
         
         if let viewController = viewController as? PresentView {
-            let presenter = PresentPresenter(view: viewController, fullDescription: description, news: rssNews)
+            let presenter = PresentPresenter(view: viewController, news: rssNews)
             viewController.presenter = presenter
         }
         

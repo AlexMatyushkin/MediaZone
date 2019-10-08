@@ -9,6 +9,11 @@
 import UIKit
 
 /// NewsList Module Entity
-struct NewsListEntity {
-
+struct FullNews{
+    var isOnline: Bool
+    var title: String
+    var fullDescription: String
+    var onlineSubject: [String]?
+    var date: String
+    var image: String?
 }

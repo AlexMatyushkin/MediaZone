@@ -13,29 +13,31 @@ import SwiftSoup
 /// NewsList Module Interactor
 class NewsListInteractor: NewsListInteractorProtocol {
     var rssFeed: RSSFeed = RSSFeed()
-    var newListRecived: (([RSSnewsList]) -> Void)?
     var errorRecived: ((Error?) -> Void)?
-    var fullNewsDescriptionRecived: ((String?, [String]?) -> Void)?
+    var fullNewsDescriptionRecived: ((FullNews) -> Void)?
+    var listOfNewsRecived: (([RSSnews]) -> Void)?
     
     func getNewsList() {
-        rssFeed.getRSS(complation: { newsList, error in
+        rssFeed.getRSS(complation: { [weak self] newsList, error in
             
             guard let listNews = newsList else {
-                self.errorRecived?(error)
+                self?.errorRecived?(error)
                 return
             }
             
-            self.newListRecived?(listNews)
+            self?.listOfNewsRecived?(listNews)
         })
     }
     
-    func getFullNewsDescription(url: URL) {
+   func getFullNewsDescription(url: URL, news: RSSnews){
         // This part of code can parse news and get full description
         do {
            let html = try String(contentsOf: url)
            let doc = try SwiftSoup.parse(html).body()
            let fullDescription = try doc?.getElementsByClass("mz-publish__text")
-           let text = try fullDescription?.text()
+           guard let title = news.title else { return }
+           guard let text = try fullDescription?.text() else { return }
+           var isHideOnline = false
             
             if (try doc?.getElementsByClass("event-container-root")) != nil {
                 guard let items = try doc?.getElementsByClass("mz-publish__text__item") else { return }
@@ -45,7 +47,17 @@ class NewsListInteractor: NewsListInteractorProtocol {
                     let text = try item.text()
                     onlineNews.append(text)
                 }
-                self.fullNewsDescriptionRecived?(text, onlineNews)
+                
+                if onlineNews.isEmpty {
+                    isHideOnline = true
+                } else {
+                    isHideOnline = false
+                }
+                
+                DispatchQueue.main.async {
+                  self.fullNewsDescriptionRecived?(FullNews(isOnline: isHideOnline, title: title, fullDescription: text, onlineSubject: onlineNews, date: news.publishDate, image: news.image))
+                }
+                
             }
             
         } catch {

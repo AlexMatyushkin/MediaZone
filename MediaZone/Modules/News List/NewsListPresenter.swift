@@ -15,7 +15,7 @@ class NewsListPresenter {
     private var interactor: NewsListInteractorProtocol
     private var router: NewsListRouterProtocol
     
-    var source = [RSSnewsList]()
+    var source = [RSSnews]()
     
     init(view: NewsListViewProtocol) {
         self._view = view
@@ -26,11 +26,12 @@ class NewsListPresenter {
 
 // MARK: - extending NewsListPresenter to implement it's protocol
 extension NewsListPresenter: NewsListPresenterProtocol {
+    
     func loadNews() {
        
         self.interactor.getNewsList()
         
-        self.interactor.newListRecived = {[weak self] newsList in
+        self.interactor.listOfNewsRecived = {[weak self] newsList in
             self?.source = newsList
             self?._view?.stopRefreshing()
             self?._view?.reloadTableView()
@@ -45,14 +46,30 @@ extension NewsListPresenter: NewsListPresenterProtocol {
         }
     }
     
-    func makeNewsFullDescription(url: URL, index: Int) {
-        self.interactor.getFullNewsDescription(url: url)
+    func makeNewsFullDescription(index: Int) {
+        self._view?.startShowHud()
         
-        self.interactor.fullNewsDescriptionRecived = {[weak self] fullDescription, onlineText in
-            if let news = self?.source[index] {
-                guard let controller = self?.router.createPresentModule(description: fullDescription, onlineText: onlineText, rssNews: news) else { return }
-                self?._view?.presentModule(viewController: controller)
-            }
+        guard let newsLink = self.source[index].url else {
+            self._view?.dissmissHud()
+            return
         }
+        
+        guard let newsURL = URL(string: newsLink) else {
+            self._view?.dissmissHud()
+            return
+        }
+        
+        self.interactor.getFullNewsDescription(url: newsURL, news: self.source[index])
+        
+        self.interactor.fullNewsDescriptionRecived = { [weak self] news in
+            guard let presentViewController = self?.router.createPresentModule(rssNews: news) else {
+                self?._view?.dissmissHud()
+                return
+            }
+            self?._view?.dissmissHud()
+            self?._view?.presentModule(viewController: presentViewController)
+        }
+        
     }
+
 }

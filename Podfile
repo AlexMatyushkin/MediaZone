@@ -9,4 +9,5 @@ target 'MediaZone' do
 	pod 'FeedKit', '~> 8.0'
 	pod 'Kingfisher', '~> 5.0'
 	pod 'SwiftSoup'
+	pod 'JGProgressHUD'
 end

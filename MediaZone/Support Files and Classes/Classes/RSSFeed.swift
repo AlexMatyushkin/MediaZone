@@ -9,7 +9,7 @@
 import Foundation
 import FeedKit
 
-struct RSSnewsList {
+struct RSSnews {
     let title: String?
     let url: String?
     let image: String?
@@ -19,7 +19,7 @@ struct RSSnewsList {
 
 class RSSFeed {
    
-    func getRSS(complation: @escaping ([RSSnewsList]?, Error?) -> Void) {
+    func getRSS(complation: @escaping ([RSSnews]?, Error?) -> Void) {
         let feedURL = URL.init(string: "https://zona.media/rss")!
         
         let parser = FeedParser(URL: feedURL)
@@ -28,14 +28,14 @@ class RSSFeed {
             if result.isSuccess {
                 guard let rssFeed = result.rssFeed else { return }
                 guard let items = rssFeed.items else { return }
-                var rssNewsList = [RSSnewsList]()
+                var rssNewsList = [RSSnews]()
                 
                 for item in items {
                     guard let date = item.pubDate else { return }
                     let formatter = DateFormatter()
-                    formatter.dateFormat = "E, d MMM yyyy HH:mm:ss"
+                    formatter.dateFormat = "MM-dd-yyyy HH:mm"
                     let correctDate = formatter.string(from: date)
-                    let news = RSSnewsList(title: item.title, url: item.link, image: item.enclosure?.attributes?.url, description: item.description, publishDate: correctDate)
+                    let news = RSSnews(title: item.title, url: item.link, image: item.enclosure?.attributes?.url, description: item.description, publishDate: correctDate)
                     rssNewsList.append(news)
                 }
                 complation(rssNewsList, nil)

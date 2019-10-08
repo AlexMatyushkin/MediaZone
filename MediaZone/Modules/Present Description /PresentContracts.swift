@@ -16,8 +16,7 @@ import UIKit
  */
 /// Present Module View Protocol
 protocol PresentViewProtocol: class {
-    var titleLabel: UILabel! { get set }
-    var presentTextView: UITextView! { get set }
+
 }
 
 //MARK: Interactor -
@@ -29,8 +28,9 @@ protocol PresentInteractorProtocol {
 //MARK: Presenter -
 /// Present Module Presenter Protocol
 protocol PresentPresenterProtocol {
-    var fullDescription: String? { get set }
-    var title: String? { get set }
+    var news: FullNews { get set }
+    var cellType: [PresentCellType] { get set }
+  
 }
 
 //MARK: Router (aka: Wireframe) -
